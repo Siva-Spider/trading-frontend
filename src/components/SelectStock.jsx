@@ -90,7 +90,7 @@ const SelectStock = (props) => {
         (broker) => broker.profileData && broker.profileData.status === "success"
     );
 
-    const [selectionType, setSelectionType] = useState("EQUITY");
+    const [selectionType, setSelectionType] = useState("");
 
     return (
         <div style={{ padding: "20px" }}>
