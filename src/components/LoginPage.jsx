@@ -7,7 +7,8 @@ function LoginPage({ onLoginSuccess, onRegisterClick, onForgotClick }) {
   const [passwordInput, setPasswordInput] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false); // 👈 toggle state
 
-
+  const API_URL = "https://trading-backend-1-l859.onrender.com";
+  
   const handleSubmit = (e) => {
   e.preventDefault();
 
@@ -16,7 +17,7 @@ function LoginPage({ onLoginSuccess, onRegisterClick, onForgotClick }) {
     return;
   }
 
-  fetch("http://127.0.0.1:5000/api/login", {
+  fetch("${API_URL}/api/login", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ username: userId, password: passwordInput, role }),
