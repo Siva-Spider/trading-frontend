@@ -17,7 +17,7 @@ function LoginPage({ onLoginSuccess, onRegisterClick, onForgotClick }) {
     return;
   }
 
-  fetch("${API_URL}/api/login", {
+  fetch(`${API_URL}/api/login`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ username: userId, password: passwordInput, role }),
