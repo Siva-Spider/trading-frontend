@@ -32,7 +32,7 @@ function App() {
     });
     const [user, setUser] = useState(() => { const saved = localStorage.getItem("loggedInUser"); return saved ? JSON.parse(saved) : null; });
 
-    const API_URL = "http://127.0.0.1:5000";
+    const API_URL = "https://trading-backend-1-l859.onrender.com";
 
     // ✅ Persist state to localStorage whenever it changes
     useEffect(() => { localStorage.setItem("activeTab", activeTab); }, [activeTab]);
