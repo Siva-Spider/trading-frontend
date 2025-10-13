@@ -16,10 +16,11 @@ function AdminDashboard({ user, onBackToLogin }) {
   return null;
   };
 
-
+  const API_URL = "https://trading-backend-1-l859.onrender.com";
+  
   useEffect(() => {
   const fetchUsers = () => {
-    fetch("http://127.0.0.1:5000/api/admin/users")
+    fetch("${API_URL}/api/admin/users")
       .then((res) => res.json())
       .then((data) => {
         setUsers(data.users);
@@ -36,29 +37,29 @@ function AdminDashboard({ user, onBackToLogin }) {
 
 
   const handleApprove = (username) => {
-    fetch(`http://127.0.0.1:5000/api/admin/approve/${username}`, { method: "POST" }).then(() => {
+    fetch(`${API_URL}/api/admin/approve/${username}`, { method: "POST" }).then(() => {
       const userObj = pendingUsers.find((u) => u.username === username);
       setUsers([...users, userObj]);
       setPendingUsers(pendingUsers.filter((u) => u.username !== username));
       setSelectedPending(null);
        // Send email to user about approval
-      fetch(`http://127.0.0.1:5000/api/admin/send_email/${username}?status=approved`, { method: "POST" });
+      fetch(`${API_URL}/api/admin/send_email/${username}?status=approved`, { method: "POST" });
     });
   };
 
   const handleReject = (username) => {
-    fetch(`http://127.0.0.1:5000/api/admin/reject/${username}`, { method: "POST" }).then(() => {
+    fetch(`${API_URL}/api/admin/reject/${username}`, { method: "POST" }).then(() => {
       const userObj = pendingUsers.find((u) => u.username === username);
       setRejectedUsers([...rejectedUsers, userObj]);
       setPendingUsers(pendingUsers.filter((u) => u.username !== username));
       setSelectedPending(null);
       // Send email to user about rejection
-      fetch(`http://127.0.0.1:5000/api/admin/send_email/${username}?status=rejected`, { method: "POST" });
+      fetch(`${API_URL}/api/admin/send_email/${username}?status=rejected`, { method: "POST" });
     });
   };
 
   const handleDeleteRejectedUser = (username) => {
-  fetch(`http://127.0.0.1:5000/api/admin/delete-rejected/${username}`, { method: "DELETE" })
+  fetch(`${API_URL}/api/admin/delete-rejected/${username}`, { method: "DELETE" })
     .then(() => {
       setRejectedUsers(rejectedUsers.filter((u) => u.username !== username));
       setSelectedUser(null);
@@ -68,7 +69,7 @@ function AdminDashboard({ user, onBackToLogin }) {
 
   const handleResetPassword = async (username) => {
   try {
-    const response = await fetch(`http://127.0.0.1:5000/api/admin/reset-password/${username}`, {
+    const response = await fetch(`${API_URL}/api/admin/reset-password/${username}`, {
       method: "POST",
     });
     const result = await response.json();
@@ -87,7 +88,7 @@ function AdminDashboard({ user, onBackToLogin }) {
     if (!window.confirm(`Are you sure you want to delete ${username}?`)) return;
 
     try {
-      const response = await fetch(`http://127.0.0.1:5000/api/admin/delete-user/${username}`, {
+      const response = await fetch(`${API_URL}/api/admin/delete-user/${username}`, {
         method: "DELETE",
       });
       const result = await response.json();
@@ -223,7 +224,7 @@ function AdminDashboard({ user, onBackToLogin }) {
           <h3 className="font-bold mb-2">Pending Registrations</h3>
           <button
             onClick={() => {
-                fetch("http://127.0.0.1:5000/api/admin/users")
+                fetch("${API_URL}/api/admin/users")
                 .then((res) => res.json())
                 .then((data) => {
                     setUsers(data.users);
