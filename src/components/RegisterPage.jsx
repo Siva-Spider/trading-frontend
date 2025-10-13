@@ -24,6 +24,8 @@ function RegisterPage({ onBackToLogin }) {
     return regex.test(password);
   };
 
+  const API_URL = "https://trading-backend-1-l859.onrender.com";
+  
   const handleRegister = async (e) => {
     e.preventDefault();
 
@@ -47,7 +49,7 @@ function RegisterPage({ onBackToLogin }) {
 
     try {
     // Send registration data to backend
-    const response = await fetch("http://127.0.0.1:5000/api/register", {
+    const response = await fetch(`${API_URL}/api/register`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -66,7 +68,7 @@ function RegisterPage({ onBackToLogin }) {
 
     if (result.success) {
       // Optionally send welcome email
-      await fetch("http://127.0.0.1:5000/api/send-welcome-email", {
+      await fetch("${API_URL}/api/send-welcome-email", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: form.email, firstName: form.firstName }),
