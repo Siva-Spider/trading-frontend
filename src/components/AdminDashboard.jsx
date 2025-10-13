@@ -20,7 +20,7 @@ function AdminDashboard({ user, onBackToLogin }) {
   
   useEffect(() => {
   const fetchUsers = () => {
-    fetch("${API_URL}/api/admin/users")
+    fetch(`${API_URL}/api/admin/users`)
       .then((res) => res.json())
       .then((data) => {
         setUsers(data.users);
@@ -224,7 +224,7 @@ function AdminDashboard({ user, onBackToLogin }) {
           <h3 className="font-bold mb-2">Pending Registrations</h3>
           <button
             onClick={() => {
-                fetch("${API_URL}/api/admin/users")
+                fetch(`${API_URL}/api/admin/users`)
                 .then((res) => res.json())
                 .then((data) => {
                     setUsers(data.users);
