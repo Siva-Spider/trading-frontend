@@ -68,7 +68,7 @@ function RegisterPage({ onBackToLogin }) {
 
     if (result.success) {
       // Optionally send welcome email
-      await fetch("${API_URL}/api/send-welcome-email", {
+      await fetch(`${API_URL}/api/send-welcome-email`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: form.email, firstName: form.firstName }),
